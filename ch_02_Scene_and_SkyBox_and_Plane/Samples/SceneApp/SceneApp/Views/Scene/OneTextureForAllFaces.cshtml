@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "OneTextureForAllFaces";
+}
+
+<script>
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var boxGeoMetery, boxMaterial, box;
+
+    //EVERY THING IN THIS FUNCTION
+    init();
+
+    //Life Cycle 
+    animate();
+
+    
+    function init() {
+
+        Scene = new THREE.Scene();
+
+        Camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+
+        boxGeoMetery = new THREE.CubeGeometry(1, 1, 1);
+        boxMaterial = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/crate.jpg') }
+        );
+        box = new THREE.Mesh(boxGeoMetery, boxMaterial);
+        box.position.z = -5;
+        Scene.add(box);
+
+        render();
+    }
+        
+    function animate()
+    {
+        box.rotation.x += .02;
+        box.rotation.y += .02;
+        box.rotation.z += .02;
+
+        render();
+
+        requestAnimationFrame(animate);
+    }
+
+    function render()
+    {
+        Renderer.render(Scene, Camera);
+    }
+   
+    /*
+    var camera;
+    var scene;
+    var renderer;
+    var mesh;
+
+    init();
+    animate();
+
+    function init() {
+
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+
+
+        var geometry = new THREE.CubeGeometry(1, 1, 1);
+        var material = new THREE.MeshBasicMaterial({ map: THREE.ImageUtils.loadTexture('/Design/images/crate.jpg') });
+
+        mesh = new THREE.Mesh(geometry, material);
+        mesh.position.z = -5;
+        scene.add(mesh);
+
+        renderer = new THREE.WebGLRenderer();
+        renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+       
+
+        render();
+    }
+
+    function animate() {
+        mesh.rotation.x += .04;
+        mesh.rotation.y += .02;
+
+        render();
+        requestAnimationFrame(animate);
+    }
+
+    function render() {
+        renderer.render(scene, camera);
+    }
+    */
+   
+</script>
+

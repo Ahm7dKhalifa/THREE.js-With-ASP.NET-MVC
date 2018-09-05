@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "SkyBox";
+}
+
+<script>
+   
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var boxGeoMetery, boxMaterial, box;
+
+
+    //EVERY THING IN THIS FUNCTION
+    init();
+
+    //Life Cycle
+    animate();
+
+
+    function init() {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 10000);
+        /*
+        Camera.position.set(1, 1, 1);
+        Camera.lookAt(Scene.position);
+        */
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        //set texture for every face
+        var Material_X_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/bricks.jpg'), overdraw: 0.5  }
+        );
+        var Material_X_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/crate.jpg'), overdraw: 0.5  }
+        );
+        var Material_Y_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/clouds.jpg'), overdraw: 0.5  }
+        );
+        var Material_Y_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/stone-wall.jpg'), overdraw: 0.5  }
+        );
+        var Material_Z_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/water.jpg'), overdraw: 0.5  }
+        );
+        var Material_Z_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/wood-floor.jpg'), overdraw: 0.5  }
+        );
+        var Materials = [Material_X_Pos, Material_X_Neg, Material_Y_Pos, Material_Y_Neg, Material_Z_Pos, Material_Z_Neg];
+        //our box
+        boxGeoMetery = new THREE.CubeGeometry(1000, 1000, 1000,1,1,1);
+        boxMaterial = new THREE.MeshFaceMaterial(Materials);
+        box = new THREE.Mesh(boxGeoMetery, boxMaterial);
+        box.scale.set(-1, 1, 1);
+        Scene.add(box);
+        render();
+    }
+
+    function animate()
+    {
+        Camera.rotation.y += .01;
+        render();
+        requestAnimationFrame(animate);
+       
+    }
+
+    function render()
+    {
+            Renderer.render(Scene, Camera);
+    }
+</script>
+
+

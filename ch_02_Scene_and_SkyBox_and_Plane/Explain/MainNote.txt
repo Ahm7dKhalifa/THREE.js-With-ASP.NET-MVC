@@ -1,0 +1,91 @@
+basic componant for the scene 
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   38
+-------------
+#################################### 
+- MOST important Properties and fuctions  for the scene
+- and how to use them ?
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   46
+-------------
+*************************************
+basic note on geometry and material  
+*************************************
+################################### 
+- what is the geometry
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   47
+-------------  
+################################### 
+- how to use standered and customize(complex) geometry 
+  depend on the bilt-in geometry
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   48
+------------- 
+################################### 
+- using multi materials
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   51
+------------- 
+************************************
+properties of the mesh(object)
+************************************
+###################################
+- basic componant for any mesh ( transform )
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   52
+-------------  
+###################################
+- different way to set the transform componant
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   53
+------------- 
+************************************
+camera
+************************************
+###################################
+-  what is different type of camera?
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   57
+-------------  
+###################################
+-  basic properties for PerspectiveCamera
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   60
+-------------  
+###################################
+-  basic properties for OrthographicCamera
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   61
+-------------  
+###################################
+-  Focusing the camera on a specific point
+-------------
+BOOKS : LEARNING THREE.JS 
+PAGE  :   62
+-------------
+***********************************
+	texture and skybox
+**********************************
+###################################
+-  what is texture 
+-  type of it 
+-------------
+https://solutiondesign.com/blog/-/blogs/webgl-and-three-js-texture-mappi-1                
+-------------
+####################################
+- cube and simple skyBox
+-----------------
+https://solutiondesign.com/blog/-/blogs/webgl-and-three-js-creating-a-real-scene
+-----------------
+              

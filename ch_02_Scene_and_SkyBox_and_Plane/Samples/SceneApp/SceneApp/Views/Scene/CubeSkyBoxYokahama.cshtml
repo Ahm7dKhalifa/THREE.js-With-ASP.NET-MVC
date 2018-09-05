@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "CubeSkyBoxYokahama";
+}
+
+
+@{
+    ViewBag.Title = "SkyBox2";
+}
+
+
+<div id="ThreeJS" style="position: absolute; left:0px; top:0px"></div>
+<script>
+
+//i learn from Stemkoski which is very good website for learn three.js
+
+/*
+	Three.js "tutorials by example"
+	Author: Lee Stemkoski
+	Date: July 2013 (three.js v59dev)
+*/
+
+// MAIN
+
+// standard global variables
+var container, scene, camera, renderer, controls, stats;
+
+var clock = new THREE.Clock();
+// custom global variables
+var cube;
+
+init();
+animate();
+
+// FUNCTIONS
+function init()
+{
+	// SCENE
+	scene = new THREE.Scene();
+	// CAMERA
+	var SCREEN_WIDTH = window.innerWidth, SCREEN_HEIGHT = window.innerHeight;
+	var VIEW_ANGLE = 60, ASPECT = SCREEN_WIDTH / SCREEN_HEIGHT, NEAR = 0.1, FAR = 200;
+	camera = new THREE.PerspectiveCamera( VIEW_ANGLE, ASPECT, NEAR, FAR);
+	scene.add(camera);
+	camera.position.set(0,0,50);
+	camera.lookAt(scene.position);
+	// RENDERER
+    renderer = new THREE.WebGLRenderer( {antialias:true} );
+	renderer.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+	container = document.getElementById( 'ThreeJS' );
+	container.appendChild( renderer.domElement );
+	// CONTROLS
+	controls = new THREE.OrbitControls( camera, renderer.domElement );
+	// LIGHT
+	var light = new THREE.PointLight(0xffffff);
+	light.position.set(0,250,0);
+	scene.add(light);
+	////////////
+	// CUSTOM //
+	////////////
+	// axes
+	var axes = new THREE.AxisHelper(1000);
+	scene.add( axes );
+    //set texture for every face
+    // front
+    var Material_X_Pos = new THREE.MeshBasicMaterial(
+        { map: THREE.ImageUtils.loadTexture('/Design/images/360/yokahama/posx.jpg'), side: THREE.BackSide }
+    );
+    // behined
+    var Material_X_Neg = new THREE.MeshBasicMaterial(
+        {
+            map: THREE.ImageUtils.loadTexture('/Design/images/360/yokahama/negx.jpg'), side: THREE.BackSide }
+    );
+    // top
+    var Material_Y_Pos = new THREE.MeshBasicMaterial(
+        { map: THREE.ImageUtils.loadTexture('/Design/images/360/yokahama/posy.jpg'), side: THREE.BackSide }
+    );
+    // bottom
+    var Material_Y_Neg = new THREE.MeshBasicMaterial(
+        { map: THREE.ImageUtils.loadTexture('/Design/images/360/yokahama/negy.jpg'), side: THREE.BackSide}
+    );
+    // right
+    var Material_Z_Pos = new THREE.MeshBasicMaterial(
+        { map: THREE.ImageUtils.loadTexture('/Design/images/360/yokahama/posz.jpg'), side: THREE.BackSide }
+    );
+    // left
+    var Material_Z_Neg = new THREE.MeshBasicMaterial(
+        { map: THREE.ImageUtils.loadTexture('/Design/images/360/yokahama/negz.jpg'), side: THREE.BackSide}
+    );
+    var Materials = [Material_X_Pos, Material_X_Neg, Material_Y_Pos, Material_Y_Neg, Material_Z_Pos, Material_Z_Neg];
+
+    var skyMaterial = new THREE.MeshFaceMaterial(Materials);
+    var skyGeometry = new THREE.CubeGeometry(100,100, 100);
+	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+	scene.add( skyBox );
+
+}
+
+function animate()
+{
+    requestAnimationFrame( animate );
+	render();
+	update();
+}
+
+function update()
+{
+	controls.update();
+}
+
+function render()
+{
+	renderer.render( scene, camera );
+}
+
+</script>

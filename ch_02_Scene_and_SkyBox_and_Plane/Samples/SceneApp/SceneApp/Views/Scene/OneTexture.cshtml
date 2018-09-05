@@ -1,0 +1,84 @@
+﻿
+@{
+    ViewBag.Title = "OneTexture";
+}
+
+<script>
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var boxGeoMetery, boxMaterial, box;
+    var controls;
+    //EVERY THING IN THIS FUNCTION
+    init();
+    //Life Cycle
+    animate();
+   
+    function init()
+    {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
+        Scene.add(Camera);
+        Camera.position.set(0, 0, 1000);
+        Camera.lookAt(Scene.position);
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        //axes
+        var axes = new THREE.AxisHelper(1000);
+        Scene.add(axes);
+        // CONTROLS
+        controls = new THREE.OrbitControls(Camera,Renderer.domElement);
+        //box
+        boxGeoMetery = new THREE.CubeGeometry(200, 200, 200);
+        boxMaterial = new THREE.MeshBasicMaterial();
+        boxMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/bathroom.jpg');
+        box = new THREE.Mesh(boxGeoMetery, boxMaterial);
+        box.position.x = .1;
+        Scene.add(box);
+        //Cylinder
+        var CylinderGeoMetery = new THREE.CylinderGeometry(200, 200, 200);
+        var CylinderMaterial = new THREE.MeshBasicMaterial();
+        CylinderMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/bathroom.jpg');
+        var Cylinder = new THREE.Mesh(CylinderGeoMetery, CylinderMaterial);
+        Cylinder.position.x = 400;
+        Scene.add(Cylinder);
+        //sphere
+        var SphereGeoMetery = new THREE.SphereGeometry(200, 200, 200);
+        var SphereMaterial = new THREE.MeshBasicMaterial();
+        SphereMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/bathroom.jpg');
+        var Sphere = new THREE.Mesh(SphereGeoMetery, SphereMaterial);
+        Sphere.position.x = -400;
+        Scene.add(Sphere);
+        //sphere
+        var SphereGeoMetery2 = new THREE.SphereGeometry(150, 150, 150);
+        var SphereMaterial2 = new THREE.MeshBasicMaterial();
+        SphereMaterial2.map = THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg');
+        var Sphere2 = new THREE.Mesh(SphereGeoMetery2, SphereMaterial2);
+        Sphere2.position.x = -800;
+        Scene.add(Sphere2);
+        render();
+    }
+
+    function animate()
+    {
+        requestAnimationFrame(animate);
+        render();
+        update();
+    }
+
+    function render()
+    {
+        Renderer.render(Scene, Camera);
+    }
+
+    function update()
+    {
+        controls.update();
+    }
+</script>
+

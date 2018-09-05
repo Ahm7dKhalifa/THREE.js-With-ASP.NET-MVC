@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "CubeMapWithShaderYokahama";
+}
+
+<script>
+
+    //VARIBLES
+
+    var Renderer, Scene, Camera;
+
+    var controls;
+    //EVERY THING IN THIS FUNCTION
+    init();
+    //Life Cycle
+    animate();
+
+    function init() {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1,200);
+        Scene.add(Camera);
+
+        Camera.position.set(0, 0, 50);
+        Camera.lookAt(Scene.position);
+
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        //axes
+        var axes = new THREE.AxisHelper(100);
+        Scene.add(axes);
+        // CONTROLS
+        controls = new THREE.OrbitControls(Camera, Renderer.domElement);
+        //skybox
+        //1.Lets load the cube textures
+        var path = "/Design/images/360/yokahama/";
+        var format = '.jpg';
+        var urls = [
+            path + 'posx' + format, path + 'negx' + format,
+            path + 'posy' + format, path + 'negy' + format,
+            path + 'posz' + format, path + 'negz' + format
+        ];
+        var textureCube = THREE.ImageUtils.loadTextureCube(urls);
+        textureCube.format = THREE.RGBFormat;
+        //2.init the shader
+        var shader = THREE.ShaderLib["cube"];
+        shader.uniforms["tCube"].value = textureCube;
+        var material = new THREE.ShaderMaterial({
+            fragmentShader: shader.fragmentShader,
+            vertexShader: shader.vertexShader,
+            uniforms: shader.uniforms,
+            depthWrite: false,
+            side: THREE.BackSide
+        });
+        //3.Create the Cube Itself
+        // build the skybox Mesh
+        var cubeMesh = new THREE.Mesh(new THREE.CubeGeometry(100, 100, 100), material);
+        // add it to the scene
+        Scene.add(cubeMesh);
+
+        /*
+        var textureCube = THREE.ImageUtils.loadTextureCube(urls);
+        var GroundGeoMetery = new THREE.CubeGeometry(15, 1, 15);
+        var GroundMaterial = new THREE.MeshBasicMaterial();
+        GroundMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg');
+
+        var Ground = new THREE.Mesh(GroundGeoMetery, GroundMaterial);
+        Ground.position.set(0,-13, 0);
+        Scene.add(Ground);
+        */
+        render();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+        update();
+    }
+
+    function render() {
+
+        Renderer.render(Scene, Camera);
+    }
+
+    function update() {
+        controls.update();
+    }
+</script>
+
+
+
+
+
+
+

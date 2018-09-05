@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "EveryTextureForEveryFace";
+}
+
+<script>
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var boxGeoMetery, boxMaterial, box;
+
+    //EVERY THING IN THIS FUNCTION
+    init();
+
+    //Life Cycle
+    animate();
+
+
+    function init() {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 1, 1000);
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        //set texture for every face
+        // right
+        var Material_X_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg') }
+        );
+        // left
+        var Material_X_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg') }
+        );
+        // top
+        var Material_Y_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg') }
+        );
+        // bottom
+        var Material_Y_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg') }
+        );
+        // back
+        var Material_Z_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg') }
+        );
+        // front
+        var Material_Z_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg') }
+        );
+        var Materials = [Material_X_Pos, Material_X_Neg, Material_Y_Pos, Material_Y_Neg, Material_Z_Pos, Material_Z_Neg];
+        //our box
+        boxGeoMetery = new THREE.CubeGeometry(1, 1, 1);
+        boxMaterial = new THREE.MeshFaceMaterial(Materials);
+        box = new THREE.Mesh(boxGeoMetery, boxMaterial);
+        box.position.z = -5;
+        Scene.add(box);
+
+        render();
+    }
+
+    function animate()
+    {
+        box.rotation.x += .02;
+        box.rotation.y += .02;
+        
+
+        render();
+
+        requestAnimationFrame(animate);
+    }
+
+    function render()
+    {
+        Renderer.render(Scene, Camera);
+    }
+</script>
+

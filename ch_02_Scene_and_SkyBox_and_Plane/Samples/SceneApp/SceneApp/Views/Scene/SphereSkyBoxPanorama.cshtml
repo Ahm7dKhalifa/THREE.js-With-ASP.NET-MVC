@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "SphereSkyBoxPanorama";
+}
+
+<script>
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var boxGeoMetery, boxMaterial, box;
+    var controls;
+    //EVERY THING IN THIS FUNCTION
+    init();
+    //Life Cycle
+    animate();
+
+    function init() {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1,100);
+        Scene.add(Camera);
+        Camera.position.set(0, 0, 15);
+        Camera.lookAt(Scene.position);
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        //axes
+        var axes = new THREE.AxisHelper(100);
+        Scene.add(axes);
+        // CONTROLS
+        controls = new THREE.OrbitControls(Camera, Renderer.domElement);
+        //box
+        boxGeoMetery = new THREE.SphereGeometry(30,30, 30);
+        boxMaterial = new THREE.MeshBasicMaterial();
+        boxMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/panorama/MyHome2.jpg');
+        boxMaterial.side = THREE.BackSide;
+        box = new THREE.Mesh(boxGeoMetery, boxMaterial);
+        Scene.add(box);
+        var GroundGeoMetery = new THREE.CubeGeometry(15, 1, 15);
+        var GroundMaterial = new THREE.MeshBasicMaterial();
+        GroundMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg');
+
+        var Ground = new THREE.Mesh(GroundGeoMetery, GroundMaterial);
+        Ground.position.set(0,-13, 0);
+        Scene.add(Ground);
+
+        render();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+        update();
+    }
+
+    function render() {
+        Renderer.render(Scene, Camera);
+    }
+
+    function update() {
+        controls.update();
+    }
+</script>
+

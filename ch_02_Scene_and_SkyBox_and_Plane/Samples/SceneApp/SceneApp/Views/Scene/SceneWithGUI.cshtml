@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewBag.Title = "SceneWithGUI";
+}
+
+<script>
+			// Our Javascript will go here.
+            var scene,camera,renderer;
+            var cube,jar;
+            var speed = 0.1;
+            var visiblePara = false;
+            //scene
+            scene = new THREE.Scene();
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+            renderer = new THREE.WebGLRenderer();
+            renderer.setClearColor(new THREE.Color(0xEEEEEE));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            var geometry = new THREE.BoxGeometry(2, 2, 2);
+            var material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+            var cube = new THREE.Mesh(geometry, material);
+            scene.add(cube);
+
+            camera.position.z = 10;
+            camera.position.x = 10;
+            camera.position.y = 10;
+            camera.lookAt(scene.position);
+
+            var GUI = new dat.GUI();
+            var Controllers = new function () {
+                            this.add = function(){
+
+                                var geometry = new THREE.BoxGeometry(2, 2, 2);
+                                var material = new THREE.MeshBasicMaterial({ color: Math.random() * 0xffffff, wireframe: true });
+                                var Mycube = new THREE.Mesh(geometry, material);
+                                scene.add(Mycube);
+                                Mycube.name = "cube-" + scene.children.length;
+
+
+                                // position the cube randomly in the scene
+
+                                Mycube.position.x =  Math.round((Math.random() * 20 ));
+                                Mycube.position.y = Math.round((Math.random() * 5));
+                                Mycube.position.z =  Math.round((Math.random() * 10 ));
+                            },
+                            this.name = "Cube",
+                            this.geometry = "",
+                            this.showModel = true,
+                            this.color = "#ff0000",
+                            this.dimentionX = 1,
+                            this.dimentionY = 1,
+                            this.dimentionZ = 1,
+                            this.positionX = 1,
+                            this.positionY = 1,
+                            this.positionZ = 1,
+                            this.rotationX = 1,
+                            this.rotationY = 1,
+                            this.rotationZ = 1,
+                            this.animateX = false,
+                            this.animateY = false,
+                            this.animateZ = false,
+                            this.layers = "",
+                            this.options = ""
+                    };
+
+                GUI.remember(Controllers);
+               
+                GUI.add(Controllers, "add").name("Add");
+                
+                GUI.add(Controllers,"name").name("Name");
+                GUI.add(Controllers, "geometry", ["Cube", "Sphere"]).name("Geometry");
+
+                var model = GUI.add(Controllers, "showModel").name("showModel");
+                model.onFinishChange(function (value) {
+                    // Fires when a controller loses focus.
+
+                    cube.visible = visiblePara;
+                    visiblePara = ~visiblePara;
+
+                    
+                });
+
+                var color = GUI.addColor(Controllers, "color").name("Color");
+                
+                var Dimention = GUI.addFolder("Dimention");
+                Dimention.add(Controllers, "dimentionX").min(1).max(20).step(speed).name("DimentionX");
+                Dimention.add(Controllers, "dimentionY").min(1).max(20).step(speed).name("DimentionY");
+                Dimention.add(Controllers, "dimentionZ").min(1).max(20).step(speed).name("DimentionZ");
+
+                var Position = GUI.addFolder("Position");
+                var px = Position.add(Controllers, "positionX").min(1).max(20).step(speed).name("PositionX");
+                px.onChange(function (value) {
+                    
+                    cube.position.x = value;
+                });
+                var py = Position.add(Controllers, "positionY").min(1).max(20).step(speed).name("PositionY");
+                py.onChange(function (value) {
+                   
+                    cube.position.y = value;
+                });
+                var pz = Position.add(Controllers, "positionZ").min(1).max(20).step(speed).name("PositionZ");
+                pz.onChange(function (value) {
+                    
+                    cube.position.z = value;
+                });
+                var Rotation = GUI.addFolder("Rotation");
+                Rotation.add(Controllers, "rotationX").min(1).max(20).step(speed).name("RotationX");
+                Rotation.add(Controllers, "rotationY").min(1).max(20).step(speed).name("RotationY");
+                Rotation.add(Controllers, "rotationZ").min(1).max(20).step(speed).name("RotationZ");
+
+                var Animation = GUI.addFolder("Animation");
+                Animation.add(Controllers, "animateX").name("AnimateX");
+                Animation.add(Controllers, "animateY").name("AnimateY");
+                Animation.add(Controllers, "animateZ").name("AnimateZ");
+
+                GUI.add(Controllers, "layers", [1, 2, 3, 4]).name("Layers");
+                GUI.add(Controllers, "options", ["save", "load", "reset"]).name("Options");
+
+            animate();
+
+            function animate() {
+				requestAnimationFrame( animate );
+                render();
+			};
+
+            function render() {
+				renderer.clear();
+                renderer.render(scene,camera);
+			};
+
+
+
+</script>
+

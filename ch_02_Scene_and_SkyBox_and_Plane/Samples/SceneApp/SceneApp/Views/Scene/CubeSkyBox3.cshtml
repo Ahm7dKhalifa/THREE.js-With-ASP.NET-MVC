@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "CubeSkyBox3";
+}
+
+<script>
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var boxGeoMetery, boxMaterial, box;
+    var controls;
+    //EVERY THING IN THIS FUNCTION
+    init();
+
+    //Life Cycle
+    animate();
+
+
+    function init() {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 5000);
+        Scene.add(Camera);
+        Camera.position.set(0, 0, 1000);
+        Camera.lookAt(Scene.position);
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        
+        // axes
+        var axes = new THREE.AxisHelper(1000);
+        Scene.add(axes);
+        // CONTROLS
+        controls = new THREE.OrbitControls(Camera,Renderer.domElement);
+
+        //set texture for every face
+        // front
+        var Material_X_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/Front.jpg'), side: THREE.BackSide }
+        );
+        // behined
+        var Material_X_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/Back.jpg'), side: THREE.BackSide }
+        );
+        // top
+        var Material_Y_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/Top.jpg'), side: THREE.BackSide }
+        );
+        // bottom
+        var Material_Y_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/Floor.jpg'), side: THREE.BackSide }
+        );
+        // right
+        var Material_Z_Pos = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/Right.jpg'), side: THREE.BackSide }
+        );
+        // left
+        var Material_Z_Neg = new THREE.MeshBasicMaterial(
+            { map: THREE.ImageUtils.loadTexture('/Design/images/Left.jpg'), side: THREE.BackSide }
+        );
+        var Materials = [Material_X_Pos, Material_X_Neg, Material_Y_Pos, Material_Y_Neg, Material_Z_Pos, Material_Z_Neg];
+        //our box
+        boxGeoMetery = new THREE.CubeGeometry(2000,2000, 2000);
+        boxMaterial = new THREE.MeshFaceMaterial(Materials);
+        box = new THREE.Mesh(boxGeoMetery, boxMaterial);
+      
+        Scene.add(box);
+
+        render();
+    }
+
+    function animate()
+    {
+       
+        requestAnimationFrame(animate);
+        render();
+        update();
+    }
+
+    function render()
+    {
+        Renderer.render(Scene, Camera);
+    }
+
+    function update()
+    {
+
+
+        controls.update();
+
+    }
+</script>
+
