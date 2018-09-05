@@ -1,0 +1,109 @@
+what is geometery?
+--------------
+book : learning three.js
+page : 127
+--------------
+###############################
+type of geometery
+--------------
+book : learning three.js
+page : 127,128
+*********************************
+Two-dimensional geometries
+*********************************
+###############################
+PlaneGeometry
+--------------
+book : learning three.js
+page : 128
+###############################
+CircleGeometry
+--------------
+book : learning three.js
+page : 131
+###############################
+ShapeGeometry
+--------------
+book : learning three.js
+page : 132
+*********************************
+3-dimensional geometries
+*********************************
+###############################
+CubeGeometry
+--------------
+book : learning three.js
+page : 138
+###############################
+SphereGeometry
+--------------
+book : learning three.js
+page : 139
+###############################
+CylinderGeometry
+--------------
+book : learning three.js
+page : 142
+###############################
+TorusGeometry
+--------------
+book : learning three.js
+page : 144
+###############################
+TorusKnotGeometry
+--------------
+book : learning three.js
+page : 145
+###############################
+PolyhedronGeometry
+--------------
+book : learning three.js
+page : 147
+###############################
+TetrahedronGeometry
+--------------
+book : learning three.js
+page : 149
+###############################
+IcosahedronGeometry
+--------------
+book : learning three.js
+page : 149
+###############################
+###############################
+OctahedronGeometry
+--------------
+book : learning three.js
+page : 150
+--------------
+book : learning three.js
+page : 149
+********************************
+advance geometry
+********************************
+###############################
+ConvexGeometry
+--------------
+book : learning three.js
+page : 154
+###############################
+LatheGeometry
+
+--------------
+book : learning three.js
+page : 154
+###############################
+ExtrudeGeometry
+--------------
+book : learning three.js
+page : 158
+###############################
+TubeGeometry
+--------------
+book : learning three.js
+page : 160
+###############################
+Extrude from SVG Geometry
+--------------
+book : learning three.js
+page : 164
