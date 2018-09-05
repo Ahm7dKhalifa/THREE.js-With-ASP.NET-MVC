@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "ImportObjectFromBlender";
+}
+
+
+<div id="Stats-output">
+</div>
+<!-- Div which will hold the Output -->
+<div id="WebGL-output">
+</div>
+
+<!-- Javascript code that runs our Three.js examples -->
+<script type="text/javascript">
+
+    // once everything is loaded, we run our Three.js stuff.
+    function init() {
+
+        var stats = initStats();
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render and set the size
+        var webGLRenderer = new THREE.WebGLRenderer();
+        webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+        webGLRenderer.shadowMapEnabled = true;
+
+        // position and point the camera to the center of the scene
+        camera.position.x = -30;
+        camera.position.y = 30;
+        camera.position.z = 10;
+        camera.lookAt(new THREE.Vector3(0, 10, 0));
+
+        // add subtle ambient lighting
+        var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+        scene.add(ambientLight);
+
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(-40, 60, -10);
+        spotLight.castShadow = true;
+        scene.add(spotLight);
+
+
+        // add the output of the renderer to the html element
+        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
+
+        //load the model
+        var step = 0;
+        var mesh;
+
+        var loader = new THREE.JSONLoader();
+        loader.load('../Files/Blender/superman/superman hero101.json', function (geometry,materials) {
+            
+            // mesh = new THREE.Mesh(geometry, materials);
+            var mat = new THREE.MeshLambertMaterial();
+            mesh = new THREE.Mesh(geometry, mat);
+            mesh.position.x = 2;
+            mesh.position.y = 1;
+            mesh.position.z = -10;
+            mesh.scale.x = 5;
+            mesh.scale.z = 5;
+            mesh.scale.y = 5;
+            scene.add(mesh);
+
+        });
+
+
+        render();
+
+
+        function render() {
+            stats.update();
+
+            if (mesh) {
+                mesh.rotation.y += 0.02;
+            }
+
+
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+            webGLRenderer.render(scene, camera);
+        }
+
+        function initStats() {
+
+            var stats = new Stats();
+            stats.setMode(0); // 0: fps, 1: ms
+
+            // Align top-left
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+
+            document.getElementById("Stats-output").appendChild(stats.domElement);
+
+            return stats;
+        }
+    }
+    window.onload = init;
+</script>
+

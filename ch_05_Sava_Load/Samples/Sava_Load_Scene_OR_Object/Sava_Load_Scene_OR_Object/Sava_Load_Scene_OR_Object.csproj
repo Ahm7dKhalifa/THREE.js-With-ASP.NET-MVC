@@ -1,0 +1,433 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1957EE09-A5F8-4955-8978-AFA39B97F8C7}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Sava_Load_Scene_OR_Object</RootNamespace>
+    <AssemblyName>Sava_Load_Scene_OR_Object</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\Export_ImportController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Design\images\360\360-panorama-matador-seo.jpg" />
+    <Content Include="Design\images\360\Ashraf.jpg" />
+    <Content Include="Design\images\360\banquet.jpg" />
+    <Content Include="Design\images\360\Home\negx.jpg" />
+    <Content Include="Design\images\360\Home\negy.jpg" />
+    <Content Include="Design\images\360\Home\negz.jpg" />
+    <Content Include="Design\images\360\Home\posx.jpg" />
+    <Content Include="Design\images\360\Home\posy.jpg" />
+    <Content Include="Design\images\360\Home\posz.jpg" />
+    <Content Include="Design\images\360\images.jpg" />
+    <Content Include="Design\images\360\parliament\negx.jpg" />
+    <Content Include="Design\images\360\parliament\negy.jpg" />
+    <Content Include="Design\images\360\parliament\negz.jpg" />
+    <Content Include="Design\images\360\parliament\posx.jpg" />
+    <Content Include="Design\images\360\parliament\posy.jpg" />
+    <Content Include="Design\images\360\parliament\posz.jpg" />
+    <Content Include="Design\images\360\parliament\readme.txt" />
+    <Content Include="Design\images\360\yokahama\negx.jpg" />
+    <Content Include="Design\images\360\yokahama\negy.jpg" />
+    <Content Include="Design\images\360\yokahama\negz.jpg" />
+    <Content Include="Design\images\360\yokahama\posx.jpg" />
+    <Content Include="Design\images\360\yokahama\posy.jpg" />
+    <Content Include="Design\images\360\yokahama\posz.jpg" />
+    <Content Include="Design\images\Back.jpg" />
+    <Content Include="Design\images\bathroom.jpg" />
+    <Content Include="Design\images\brick-wall.jpg" />
+    <Content Include="Design\images\bricks.jpg" />
+    <Content Include="Design\images\clouds.jpg" />
+    <Content Include="Design\images\crate.jpg" />
+    <Content Include="Design\images\earth-specular.gif" />
+    <Content Include="Design\images\earth.jpg" />
+    <Content Include="Design\images\Earth.png" />
+    <Content Include="Design\images\EarthNormal.png" />
+    <Content Include="Design\images\EarthSpec.png" />
+    <Content Include="Design\images\floor-wood.jpg" />
+    <Content Include="Design\images\Floor.jpg" />
+    <Content Include="Design\images\Front.jpg" />
+    <Content Include="Design\images\Left.jpg" />
+    <Content Include="Design\images\Mars-normalmap_2k.png" />
+    <Content Include="Design\images\mars_1k_color.jpg" />
+    <Content Include="Design\images\mars_1k_normal.jpg" />
+    <Content Include="Design\images\Mars_2k-050104.png" />
+    <Content Include="Design\images\panorama\MyHome.jpg" />
+    <Content Include="Design\images\panorama\MyHome2.jpg" />
+    <Content Include="Design\images\panorama\PhotafPanoramaPicHD.jpg" />
+    <Content Include="Design\images\Right.jpg" />
+    <Content Include="Design\images\stone-wall.jpg" />
+    <Content Include="Design\images\Top.jpg" />
+    <Content Include="Design\images\water.jpg" />
+    <Content Include="Design\images\wood-floor.jpg" />
+    <Content Include="Design\js\Command.js" />
+    <Content Include="Design\js\commands\AddObjectCommand.js" />
+    <Content Include="Design\js\commands\AddScriptCommand.js" />
+    <Content Include="Design\js\commands\MoveObjectCommand.js" />
+    <Content Include="Design\js\commands\MultiCmdsCommand.js" />
+    <Content Include="Design\js\commands\RemoveObjectCommand.js" />
+    <Content Include="Design\js\commands\RemoveScriptCommand.js" />
+    <Content Include="Design\js\commands\SetColorCommand.js" />
+    <Content Include="Design\js\commands\SetGeometryCommand.js" />
+    <Content Include="Design\js\commands\SetGeometryValueCommand.js" />
+    <Content Include="Design\js\commands\SetMaterialColorCommand.js" />
+    <Content Include="Design\js\commands\SetMaterialCommand.js" />
+    <Content Include="Design\js\commands\SetMaterialMapCommand.js" />
+    <Content Include="Design\js\commands\SetMaterialValueCommand.js" />
+    <Content Include="Design\js\commands\SetPositionCommand.js" />
+    <Content Include="Design\js\commands\SetRotationCommand.js" />
+    <Content Include="Design\js\commands\SetScaleCommand.js" />
+    <Content Include="Design\js\commands\SetSceneCommand.js" />
+    <Content Include="Design\js\commands\SetScriptValueCommand.js" />
+    <Content Include="Design\js\commands\SetUuidCommand.js" />
+    <Content Include="Design\js\commands\SetValueCommand.js" />
+    <Content Include="Design\js\Config.js" />
+    <Content Include="Design\js\dat.gui.min.js" />
+    <Content Include="Design\js\Editor.js" />
+    <Content Include="Design\js\History.js" />
+    <Content Include="Design\js\libs\acorn\acorn.js" />
+    <Content Include="Design\js\libs\acorn\acorn_loose.js" />
+    <Content Include="Design\js\libs\acorn\walk.js" />
+    <Content Include="Design\js\libs\app.js" />
+    <Content Include="Design\js\libs\app\index.html" />
+    <Content Include="Design\js\libs\codemirror\addon\dialog.css" />
+    <Content Include="Design\js\libs\codemirror\addon\dialog.js" />
+    <Content Include="Design\js\libs\codemirror\addon\show-hint.css" />
+    <Content Include="Design\js\libs\codemirror\addon\show-hint.js" />
+    <Content Include="Design\js\libs\codemirror\addon\tern.css" />
+    <Content Include="Design\js\libs\codemirror\addon\tern.js" />
+    <Content Include="Design\js\libs\codemirror\codemirror.css" />
+    <Content Include="Design\js\libs\codemirror\codemirror.js" />
+    <Content Include="Design\js\libs\codemirror\mode\glsl.js" />
+    <Content Include="Design\js\libs\codemirror\mode\javascript.js" />
+    <Content Include="Design\js\libs\codemirror\theme\monokai.css" />
+    <Content Include="Design\js\libs\esprima.js" />
+    <Content Include="Design\js\libs\glslprep.min.js" />
+    <Content Include="Design\js\libs\html2canvas.js" />
+    <Content Include="Design\js\libs\jsonlint.js" />
+    <Content Include="Design\js\libs\signals.min.js" />
+    <Content Include="Design\js\libs\tern-threejs\threejs.js" />
+    <Content Include="Design\js\libs\ternjs\comment.js" />
+    <Content Include="Design\js\libs\ternjs\def.js" />
+    <Content Include="Design\js\libs\ternjs\doc_comment.js" />
+    <Content Include="Design\js\libs\ternjs\infer.js" />
+    <Content Include="Design\js\libs\ternjs\polyfill.js" />
+    <Content Include="Design\js\libs\ternjs\signal.js" />
+    <Content Include="Design\js\libs\ternjs\tern.js" />
+    <Content Include="Design\js\libs\three.html.js" />
+    <Content Include="Design\js\libs\ui.js" />
+    <Content Include="Design\js\libs\ui.three.js" />
+    <Content Include="Design\js\Loader.js" />
+    <Content Include="Design\js\loaders\AnimationLoader.js" />
+    <Content Include="Design\js\loaders\AudioLoader.js" />
+    <Content Include="Design\js\loaders\BufferGeometryLoader.js" />
+    <Content Include="Design\js\loaders\Cache.js" />
+    <Content Include="Design\js\loaders\CompressedTextureLoader.js" />
+    <Content Include="Design\js\loaders\CubeTextureLoader.js" />
+    <Content Include="Design\js\loaders\DataTextureLoader.js" />
+    <Content Include="Design\js\loaders\FileLoader.js" />
+    <Content Include="Design\js\loaders\FontLoader.js" />
+    <Content Include="Design\js\loaders\ImageLoader.js" />
+    <Content Include="Design\js\loaders\JSONLoader.js" />
+    <Content Include="Design\js\loaders\Loader.js" />
+    <Content Include="Design\js\loaders\LoadingManager.js" />
+    <Content Include="Design\js\loaders\MaterialLoader.js" />
+    <Content Include="Design\js\loaders\ObjectLoader.js" />
+    <Content Include="Design\js\loaders\TextureLoader.js" />
+    <Content Include="Design\js\Menubar.Add.js" />
+    <Content Include="Design\js\Menubar.Edit.js" />
+    <Content Include="Design\js\Menubar.Examples.js" />
+    <Content Include="Design\js\Menubar.File.js" />
+    <Content Include="Design\js\Menubar.Help.js" />
+    <Content Include="Design\js\Menubar.js" />
+    <Content Include="Design\js\Menubar.Play.js" />
+    <Content Include="Design\js\Menubar.Status.js" />
+    <Content Include="Design\js\Menubar.View.js" />
+    <Content Include="Design\js\MTLLoader.js" />
+    <Content Include="Design\js\OBJLoader.js" />
+    <Content Include="Design\js\OBJLoader2.js" />
+    <Content Include="Design\js\OrbitControls.js" />
+    <Content Include="Design\js\Player.js" />
+    <Content Include="Design\js\SceneExporter.js" />
+    <Content Include="Design\js\SceneLoader.js" />
+    <Content Include="Design\js\Script.js" />
+    <Content Include="Design\js\Sidebar.Animation.js" />
+    <Content Include="Design\js\Sidebar.Geometry.BoxGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.BufferGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.CircleGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.CylinderGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.Geometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.IcosahedronGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.LatheGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.Modifiers.js" />
+    <Content Include="Design\js\Sidebar.Geometry.PlaneGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.SphereGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.TeapotBufferGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.TorusGeometry.js" />
+    <Content Include="Design\js\Sidebar.Geometry.TorusKnotGeometry.js" />
+    <Content Include="Design\js\Sidebar.History.js" />
+    <Content Include="Design\js\Sidebar.js" />
+    <Content Include="Design\js\Sidebar.Material.js" />
+    <Content Include="Design\js\Sidebar.Object.js" />
+    <Content Include="Design\js\Sidebar.Project.js" />
+    <Content Include="Design\js\Sidebar.Properties.js" />
+    <Content Include="Design\js\Sidebar.Scene.js" />
+    <Content Include="Design\js\Sidebar.Script.js" />
+    <Content Include="Design\js\Sidebar.Settings.js" />
+    <Content Include="Design\js\stats.min.js" />
+    <Content Include="Design\js\Storage.js" />
+    <Content Include="Design\js\three.js" />
+    <Content Include="Design\js\Toolbar.js" />
+    <Content Include="Design\js\Viewport.Info.js" />
+    <Content Include="Design\js\Viewport.js" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Export_Import\Download_Scene_As_JSON_File.cshtml" />
+    <Content Include="Views\Shared\_MyLayout.cshtml" />
+    <Content Include="Views\Export_Import\Save_Scene_As_JSON_File_IN_Server.cshtml" />
+    <Content Include="Views\Export_Import\LoadSceneFromClient.cshtml" />
+    <Content Include="Views\Export_Import\LoadCompleteScene.cshtml" />
+    <Content Include="Views\Export_Import\LoadObject.cshtml" />
+    <Content Include="Views\Export_Import\ImportObjectFromBlender.cshtml" />
+    <Content Include="Views\Export_Import\ImportDotObj.cshtml" />
+    <Content Include="Views\Export_Import\ImportObjectFromBlender2.cshtml" />
+    <Content Include="Views\Export_Import\ImportMultiObject_FromBlender.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Files\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49272</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:49272/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.3\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

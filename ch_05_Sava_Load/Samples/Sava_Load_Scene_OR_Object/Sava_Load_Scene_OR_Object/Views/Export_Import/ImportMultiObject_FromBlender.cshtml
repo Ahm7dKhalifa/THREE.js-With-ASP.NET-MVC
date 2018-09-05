@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "ImportMultiObject_FromBlender";
+}
+
+<div id="Stats-output">
+</div>
+<!-- Div which will hold the Output -->
+<div id="WebGL-output">
+</div>
+
+<!-- Javascript code that runs our Three.js examples -->
+<script type="text/javascript">
+
+    // once everything is loaded, we run our Three.js stuff.
+    function init() {
+
+        var stats = initStats();
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+        var scene = new THREE.Scene();
+
+        // create a camera, which defines where we're looking at.
+        var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+
+        // create a render and set the size
+        var webGLRenderer = new THREE.WebGLRenderer();
+        webGLRenderer.setClearColor(new THREE.Color(0xEEEEEE, 1.0));
+        webGLRenderer.setSize(window.innerWidth, window.innerHeight);
+        webGLRenderer.shadowMapEnabled = true;
+
+        // position and point the camera to the center of the scene
+        camera.position.x = 0;
+        camera.position.y = 10;
+        camera.position.z = 70;
+        camera.lookAt(new THREE.Vector3(0, 10, 0));
+
+        // add subtle ambient lighting
+        var ambientLight = new THREE.AmbientLight(0x0c0c0c);
+        scene.add(ambientLight);
+
+        // add spotlight for the shadows
+        var spotLight = new THREE.SpotLight(0xffffff);
+        spotLight.position.set(-40, 60, -10);
+        spotLight.castShadow = true;
+        scene.add(spotLight);
+
+
+        // add the output of the renderer to the html element
+        document.getElementById("WebGL-output").appendChild(webGLRenderer.domElement);
+
+        //load the model
+        var step = 0;
+        var mesh;
+        var object2,object3;
+
+        var loader = new THREE.JSONLoader();
+        loader.load('../Files/Blender/car/object2.json', function (geometry, materials){
+            //if faces checkbox is disabled before export jsnon file
+            //var mat = new THREE.MeshLambertMaterial();
+            //mesh = new THREE.Mesh(geometry, mat);
+
+            //because faces checkbox is enabled in blender
+            var mat = new THREE.MeshFaceMaterial(materials);
+            object2 = new THREE.Mesh(geometry, mat);
+            object2.position.x = 20;
+            object2.position.y = 20;
+            object2.position.z = -40;
+            object2.scale.x = 1;
+            object2.scale.z = 1;
+            object2.scale.y = 1;
+            scene.add(object2);
+
+
+        });
+
+        loader.load('../Files/Blender/superman/superman hero101.json', function (geometry, materials) {
+           
+
+            //because faces checkbox is enabled in blender
+            var mat = new THREE.MeshLambertMaterial();
+            object3 = new THREE.Mesh(geometry, mat);
+            object3.position.x = 2;
+            object3.position.y = 1;
+            object3.position.z = -10;
+            object3.scale.x = 10;
+            object3.scale.z = 10;
+            object3.scale.y = 10;
+            scene.add(object3);
+
+
+        });
+
+
+        render();
+
+
+        function render() {
+            stats.update();
+
+            if (mesh) {
+                mesh.rotation.y += 0.02;
+            }
+
+
+            // render using requestAnimationFrame
+            requestAnimationFrame(render);
+            webGLRenderer.render(scene, camera);
+        }
+
+        function initStats() {
+
+            var stats = new Stats();
+            stats.setMode(0); // 0: fps, 1: ms
+
+            // Align top-left
+            stats.domElement.style.position = 'absolute';
+            stats.domElement.style.left = '0px';
+            stats.domElement.style.top = '0px';
+
+            document.getElementById("Stats-output").appendChild(stats.domElement);
+
+            return stats;
+        }
+    }
+    window.onload = init;
+</script>
+
+
+
+
+

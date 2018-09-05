@@ -1,0 +1,74 @@
+*********************
+*********************
+1.Grouping and merging
+**********************
+**********************
+
+*****************
+1.1 Grouping
+*****************
+books: learning three.js
+page : 208
+
+*****************
+1.2 mergin
+*****************
+books: learning three.js
+page : 210
+
+
+***************************
+*****************************
+2.load_save_external_model
+*****************************
+***************************
+#########################
+-type of EXTERNAL MODEL
+-----------------------
+books: learning three.js
+page : 212
+
+*******************************************
+2.1 Saving and loading in Three.js JSON format
+*******************************************
+#########################
+THE TWO BASIC USING OF JSON(COMPELETE SCENE-OBJCT)
+-------------------------
+books: learning three.js
+page : 213
+-------------------------
+
+/*#################################
+how to save or export compelete scene
+-----------------------
+editor -- sidebar file
+----------------------
+
+/*#################################
+how to load compelete scene
+-----------------------
+https://github.com/mrdoob/three.js/blob/master/examples/webgl_animation_scene.html
+---------------------
+/*#################################
+how to load object or scene in json file by objectloader
+---------------------
+https://threejs.org/docs/index.html#api/loaders/ObjectLoader
+---------------------
+/*#################################
+objectloader depend on :
+----------------------
+type attribute in object attribute in json file
+*********************************
+2.2 blender
+*********************************
+####################################
+- how to add three.js to blender application
+-------------
+https://github.com/mrdoob/three.js/tree/master/utils/exporters/blender
+###################################
+- how to export object in blender 
+to json file and use it in three.js
+----------------------------
+https://www.youtube.com/watch?v=mqjwgTAGQRY
+https://www.youtube.com/watch?v=NtRrYUAd8rs
+https://www.jonathan-petitcolas.com/2015/07/27/importing-blender-modelized-mesh-in-threejs.html
