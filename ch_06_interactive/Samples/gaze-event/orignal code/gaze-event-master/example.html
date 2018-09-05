@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, shrink-to-fit=no">
+	<title>WebVR-gaze-event</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		html,body {
+			height: 100%;
+		}
+		body {
+			font-size: 14px;
+			font-family: "Arial","Microsoft YaHei","黑体",sans-serif;
+			overflow: hidden;
+		}
+		.main-page {
+			position: relative;
+			height: 100%;
+		}
+		.vr-btn {
+			position: absolute;
+			right: 18px;
+			bottom: 18px;
+			padding: 8px 12px;
+			background-color: #00aadd;
+			text-align: center;
+			color: #fff;
+			font-size: 14px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+<body>
+	<section class="main-page">
+		<div class="vr-btn">ENTER VR</div>
+	</section>
+</body>
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="../gaze-event/index.js"></script>
+<script>
+	/**
+** author:YoneChen
+** date:2017-08-18
+**/
+class Page {
+	constructor() {
+		// 初始化场景
+		this.scene = new THREE.Scene();
+		// 初始化相机
+		this.camera = new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
+		this.scene.add(this.camera);
+
+		// 初始化渲染器
+		this.renderer = new THREE.WebGLRenderer({ antialias: true } );
+		this.renderer.setSize(window.innerWidth,window.innerHeight);
+		this.renderer.setClearColor(0x519EcB);
+		this.renderer.shadowMapEnabled = true;
+		this.renderer.setPixelRatio(window.devicePixelRatio);
+		document.querySelector('.main-page').appendChild(this.renderer.domElement);
+
+		this.clock = new THREE.Clock();
+		// VR初始化
+		this.initVR();
+		// 往场景添加3d物体
+		this.start();
+		// 窗口大小调整监听
+		window.addEventListener( 'resize', this.resize.bind(this), false );
+		// 渲染动画
+		this.renderer.animate(this.update.bind(this));
+	}
+	start() {
+		const {scene,camera} = this;
+		// add crosshair
+		camera.add(this.createCrosshair());
+		// add light
+		scene.add(new THREE.AmbientLight(0xFFFFFF));
+		scene.add(this.createLight());
+		// add ground
+        scene.add(this.createGround(1000,1000));
+        // init gazeEvent
+		this.gazeEvent = new GazeEvent();
+
+		// add cubes
+		for (let i = 0; i < 100; i++) {
+			const cube = this.createCube(2,2,2 );
+			cube.position.set(
+				100*Math.random() - 50,
+				50*Math.random() -10,
+				100*Math.random() - 50
+			);
+			scene.add(cube);
+            // add eventlistener for each cube
+			this.gazeEvent.watch(cube,() => {
+                // gazeEnter emit
+				cube.material.opacity = 0.5;
+			},() => {
+                // gazeExit emit
+				cube.material.opacity = 1;
+			});
+
+		}
+	}
+	initVR() {
+		const {renderer} = this;
+		renderer.vr.enabled = true;
+		navigator.getVRDisplays().then( display => {
+            if (!display) alert('no vr display,try on mobile');
+			renderer.vr.setDevice(display[0]);
+			const button = document.querySelector('.vr-btn');
+			VRButton.init(display[0],renderer,button,() => button.textContent = 'EXIT VR',() => button.textContent = 'ENTER VR');
+		}).catch(err => console.warn(err));
+	}
+	resize() {
+		const {camera,renderer} = this;
+		// window resize
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+		renderer.setSize(window.innerWidth, window.innerHeight);
+	}
+	createCrosshair () {
+		// create crosshair
+		const geometry = new THREE.RingGeometry( 0.02, 0.03, 32 );
+		const material = new THREE.MeshBasicMaterial({
+			color: 0xffffff,
+			opacity: 0.5,
+			transparent: true
+		});
+		const crosshair = new THREE.Mesh(geometry,material);
+		crosshair.position.z = -2;
+		return crosshair;
+	}
+	createCube(width=2,height=2,depth=2,color=0xef6500) {
+		// create a cube
+		const geometry = new THREE.CubeGeometry(width,height,depth);
+		const material = new THREE.MeshLambertMaterial({ 
+			color: color,
+			needsUpdate: true,
+			opacity:1,
+			transparent:true
+		});
+		const cube = new THREE.Mesh( geometry, material );
+		cube.castShadow = true;
+		return cube;
+	}
+	createLight() {
+		// create light
+        const light = new THREE.DirectionalLight( 0xffffff, 0.3 );
+		light.position.set( 50, 50, -50 );
+		light.castShadow = true;
+		light.shadow.mapSize.width = 2048;
+		light.shadow.mapSize.height = 512;
+		return light;
+	}
+	createGround(width,height) {
+		// create ground
+		const geometry = new THREE.PlaneBufferGeometry( width, height );
+		const material = new THREE.MeshPhongMaterial( { color: 0xaaaaaa } );
+		const ground = new THREE.Mesh( geometry, material );
+		ground.rotation.x = - Math.PI / 2;
+		ground.position.y = -10;
+		ground.receiveShadow = true;
+		return ground;
+	}
+	update() {
+		const {scene,camera,renderer,clock} = this;
+		// update gazeEvent
+		this.gazeEvent.update(camera);
+		renderer.render(scene, camera);
+	}
+}
+// VRbutton logic control
+const VRButton = {
+	init(display,renderer,button,enterVR,exitVR) {
+		
+		if ( display ) {
+			button.addEventListener('click', e => {
+
+				display.isPresenting ? display.exitPresent() : display.requestPresent( [ { source: renderer.domElement } ] );
+
+			});
+
+			window.addEventListener( 'vrdisplaypresentchange', e => {
+
+				display.isPresenting ? enterVR() : exitVR();
+
+			}, false );
+
+		} else {
+
+			button.remove();
+
+		}
+	}
+
+}
+new Page();
+</script>
+</html>

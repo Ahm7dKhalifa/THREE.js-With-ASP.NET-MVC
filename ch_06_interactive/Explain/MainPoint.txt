@@ -1,0 +1,17 @@
+#######################
+event with three.x.dom
+--------------
+https://github.com/jeromeetienne/threex.domevents
+- first example method in event sample
+--------------
+#######################
+event with domEvents
+--------------
+- https://www.youtube.com/watch?v=b6BYPCDcl6A
+- second example method in event sample
+--------------
+#######################
+darg and drop event
+-------------
+https://threejs.org/examples/#webgl_interactive_draggablecubes
+- THIRD example method in event sample

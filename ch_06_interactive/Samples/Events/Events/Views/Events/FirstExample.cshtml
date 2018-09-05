@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "FirstExample";
+}
+
+<script>
+
+    //VARIBLES
+    var Renderer, Scene, Camera, Light;
+    var sphereGeoMetery, sphereMaterial, sphere;
+    var controls;
+    //EVERY THING IN THIS FUNCTION
+    init();
+    //Life Cycle
+    animate();
+
+    function init() {
+        //scene
+        Scene = new THREE.Scene();
+        //camera
+        Camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1,100);
+        Scene.add(Camera);
+        Camera.position.set(0, 0, 15);
+        Camera.lookAt(Scene.position);
+        //renderer
+        Renderer = new THREE.WebGLRenderer();
+        Renderer.setClearColor(new THREE.Color(0xEEEEEE));
+        Renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(Renderer.domElement);
+        //////////////////////////////////////////////////////////////////////////////////
+        //		init domEvents							//
+        //////////////////////////////////////////////////////////////////////////////////
+
+        var domEvents = new THREEx.DomEvents(Camera, Renderer.domElement);
+
+        //axes
+        var axes = new THREE.AxisHelper(100);
+        Scene.add(axes);
+        // CONTROLS
+        controls = new THREE.OrbitControls(Camera, Renderer.domElement);
+        //sphere
+        sphereGeoMetery = new THREE.SphereGeometry(30, 30, 30);
+        //boxGeoMetery = new THREE.CubeGeometry(30, 30, 30);
+       sphereMaterial = new THREE.MeshBasicMaterial();
+       sphereMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/360/banquet.jpg');
+       sphereMaterial.side = THREE.BackSide;
+       sphere = new THREE.Mesh(sphereGeoMetery, sphereMaterial);
+       Scene.add(sphere);
+        var GroundGeoMetery = new THREE.CubeGeometry(5, 5, 5);
+        var GroundMaterial = new THREE.MeshBasicMaterial();
+        GroundMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/floor-wood.jpg');
+
+        var Ground = new THREE.Mesh(GroundGeoMetery, GroundMaterial);
+        Ground.position.set(10,0, -10);
+        Scene.add(Ground);
+        //click event
+        domEvents.addEventListener(Ground, 'click', function (event) {
+            console.log('you clicked on mesh', Ground);
+            Ground.scale.x = 2;
+            Ground.scale.y = 2;
+            Ground.scale.x = 2;
+            Ground.position.set(-10, 0, -10);
+            //GroundMaterial.map = THREE.ImageUtils.loadTexture('/Design/images/clouds.jpg');
+        }, false);
+
+        render();
+    }
+
+    function animate() {
+        requestAnimationFrame(animate);
+        render();
+        update();
+    }
+
+    function render() {
+        Renderer.render(Scene, Camera);
+    }
+
+    function update() {
+        controls.update();
+    }
+</script>
+
+
+
+
+
