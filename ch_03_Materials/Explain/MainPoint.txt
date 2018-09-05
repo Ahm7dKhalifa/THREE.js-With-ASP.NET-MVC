@@ -1,0 +1,113 @@
+what is the material ?
+--------------
+book : learning three.js
+page : 93
+###############################
+type of materials
+--------------
+book : learning three.js
+page : 93
+###############################
+types of commom properties of materials
+--------------
+book : learning three.js
+page : 94
+###############################
+basic properties
+--------------
+book : learning three.js
+page : 94
+###############################
+blend properties
+--------------
+book : learning three.js
+page : 95
+###############################
+advance properties
+--------------
+book : learning three.js
+page : 96
+**********************************
+meshbasicmaterial
+**********************************
+what is the meshbasicmaterial?
+--------------
+book : learning three.js
+page : 97
+###################################
+properties of meshbasicmaterial?
+--------------
+book : learning three.js
+page : 97
+**********************************
+meshdepthmaterial
+**********************************
+what is the meshdepthmaterial?
+--------------
+book : learning three.js
+page : 100
+###################################
+properties of meshdepthmateriall?
+--------------
+book : learning three.js
+page : 100
+************************************
+Combining the materials
+***********************************
+- how to Combining the materials
+--------------
+book : learning three.js
+page : 102
+#####################################
+**********************************
+meshnormalmaterial
+**********************************
+what is the meshnormalmaterial?
+--------------
+book : learning three.js
+page : 106,107
+###################################
+properties of meshnormalmateriall?
+--------------
+book : learning three.js
+page : 107
+##################################
+**********************************
+meshfacematerial
+**********************************
+what is the meshfacematerial?
+--------------
+book : learning three.js
+page : 107
+###################################
+properties of meshnormalmateriall?
+--------------
+book : learning three.js
+page : 106,107
+##################################
+**********************************
+MeshLambertMaterial
+**********************************
+what is the MeshLambertMaterial?
+--------------
+book : learning three.js
+page : 110
+###################################
+properties of MeshLambertMaterial?
+--------------
+book : learning three.js
+page : 110
+##################################
+**********************************
+ShaderMaterial
+**********************************
+what is the ShaderMaterial?
+--------------
+book : learning three.js
+page : 114
+###################################
+properties of ShaderMaterial?
+--------------
+book : learning three.js
+page : 114
+##################################
